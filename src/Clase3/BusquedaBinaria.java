@@ -31,7 +31,7 @@ public class BusquedaBinaria {
 
     public static void main(String[] args) {
         int[] arreglo = {1, 3, 5, 7, 9, 11, 13};
-        int objetivo = 14;
+        int objetivo = 7;
         // Llamar al método de búsqueda binaria
         int resultado = busquedaBinaria(arreglo, objetivo);
 

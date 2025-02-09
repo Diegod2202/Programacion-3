@@ -61,23 +61,28 @@ def find_optimal_coins(coins, value):
 
 if __name__ == "__main__":
     # Imprimo la lista de las 50 monedas con mayor volumen de trading en las últimas 24 horas
+    print("Impresión de la lista de las 50 monedas con mayor volumen de trading en las últimas 24 horas: ")
+    print()
     top_coins = get_top_50_coins()
     formatted_coins = "\n".join([f"{symbol}: Price: {price}, Volume: {volume}, Change: {change}%" for symbol, price, change, volume in top_coins])
-    # print(formatted_coins + "\n")
+    print(formatted_coins + "\n")
 
     # Imprimo la lista de las 50 monedas ordenadas por precio de mayor a menor
+    print("Impresion de la lista de las 50 monedas ordenadas por precio de mayor a menor:" )
+    print()
     sorted_list = QuickSort(top_coins)
     formatted_coins = "\n".join([f"{symbol}: Price: {price}, Volume: {volume}, Change: {change}%" for symbol, price, change, volume in sorted_list])
-    # print(formatted_coins + "\n")
+    print(formatted_coins + "\n")
     
     # Imprimo la moneda con mayor cambio porcentual en las últimas 24 horas
     highest_gainer = find_highest_gainer(top_coins)
-    # print(f"Highest gainer in the last 24 hours: {highest_gainer[0]} with a change of {highest_gainer[2]}%")
-
-    value = input("Introduce un valor: ")
+    print(f"La moneda con mayor subida porcentual en las últimas 24hrs: {highest_gainer[0]} con un cambio de: {highest_gainer[2]}%")
+    print("---------------------------------")
+    value = input("Introduzca un valor en dólares para saber la cantidad de monedas que se pueden adquirir: ")
+    print()
     optimal_coins, total_spent = find_optimal_coins(top_coins, value)
-    print(f"Optimal coins for a value of {value}:")
+    print(f"Monedas óptimas para rellenar {value} dólares:")
     for coin in optimal_coins:
         spent_per_coin = coin[1] * coin[2]
         print(f"Moneda: {coin[0]}, Cantidad: {coin[1]}, Precio por moneda: {coin[2]}, Gastado: {spent_per_coin}")
-    print(f"Total gastado: {total_spent}")
+    print(f"Total gastado: $ {total_spent}")

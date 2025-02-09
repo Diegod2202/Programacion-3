@@ -1,3 +1,5 @@
+package clase6;
+
 import java.util.*;
 
 class User{

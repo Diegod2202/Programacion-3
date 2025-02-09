@@ -1,6 +1,6 @@
 import requests
 
-def get_top_50_coins():
+def get_top_50_coins(order_by='quoteVolume'):
     url = "https://api.binance.com/api/v3/ticker/24hr"
     response = requests.get(url)
     
@@ -12,10 +12,10 @@ def get_top_50_coins():
     # Filtrar solo las monedas contra USDT (mercado principal)
     usdt_pairs = [coin for coin in data if coin['symbol'].endswith('USDT')]
     
-    # Ordenar por volumen de trading en 24 horas (proxy de capitalización de mercado en Binance)
-    top_50 = sorted(usdt_pairs, key=lambda coin: float(coin['quoteVolume']), reverse=True)[:50]
+    # Ordenar por el campo especificado en el parámetro order_by
+    top_50 = sorted(usdt_pairs, key=lambda coin: float(coin[order_by]), reverse=True)[:50]
     
-    coin_list = [(coin['symbol'], float(coin['lastPrice']), float(coin['priceChangePercent'])) for coin in top_50]
+    coin_list = [(coin['symbol'], float(coin['lastPrice']), float(coin['priceChangePercent']), float(coin['quoteVolume'])) for coin in top_50]
     
     return coin_list
 
@@ -41,15 +41,16 @@ def find_highest_gainer(coins):
     return highest_gainer
 
 if __name__ == "__main__":
-    #Imprimo La lista de las 50 monedas con mayor volumen de trading en las últimas 24 horas
+    # Imprimo la lista de las 50 monedas con mayor volumen de trading en las últimas 24 horas
     top_coins = get_top_50_coins()
-    print(top_coins)
+    formatted_coins = "\n".join([f"{symbol}: Price: {price}, Volume: {volume}, Change: {change}%" for symbol, price, change, volume in top_coins])
+    print(formatted_coins + "\n")
 
-    #Imprimo la lista de las 50 monedas ordenadas por precio de menor a mayor
+    # Imprimo la lista de las 50 monedas ordenadas por precio de menor a mayor
     sorted_list = QuickSort(top_coins)
-    formatted_coins = "\n".join([f"{symbol}: {price}" for symbol, price, _ in sorted_list])
+    formatted_coins = "\n".join([f"{symbol}: Price: {price}, Volume: {volume}, Change: {change}%" for symbol, price, change, volume in sorted_list])
     print(formatted_coins + "\n")
     
-    #Imprimo la moneda con mayor cambio porcentual en las últimas 24 horas
+    # Imprimo la moneda con mayor cambio porcentual en las últimas 24 horas
     highest_gainer = find_highest_gainer(top_coins)
     print(f"Highest gainer in the last 24 hours: {highest_gainer[0]} with a change of {highest_gainer[2]}%")

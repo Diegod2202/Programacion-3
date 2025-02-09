@@ -3,7 +3,7 @@ package Clase4;
 import java.util.Arrays;
 import java.util.List;
 
-public class Actividad2 {
+public class actividad2_DosNumerosMayores {
 
     // Método principal para encontrar los dos números mayores
     public static int[] buscarDosNumerosMayores(List<Integer> numeros, int inicio, int fin) {
@@ -40,3 +40,5 @@ public class Actividad2 {
         System.out.println("Dos números mayores: " + dosNumerosMayores[0] + ", " + dosNumerosMayores[1]);
     }
 }
+
+//complejidad algoritmica: O(n) porque se recorre todo el arreglo una vez

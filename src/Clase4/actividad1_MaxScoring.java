@@ -1,7 +1,7 @@
 package Clase4;
 import java.util.List;
 
-public class MaxScoringDivideVenceras {
+public class actividad1_MaxScoring {
 
     // Método principal para encontrar el cliente con el scoring máximo
     public static Cliente buscarMaxScoring(List<Cliente> clientes, int inicio, int fin) {
@@ -21,13 +21,29 @@ public class MaxScoringDivideVenceras {
         return (maxIzquierda.scoring > maxDerecha.scoring) ? maxIzquierda : maxDerecha;
     }
 
+    static class Cliente {
+        int id;
+        String nombre;
+        double scoring;
+
+        public Cliente(int id, String nombre, double scoring) {
+            this.id = id;
+            this.nombre = nombre;
+            this.scoring = scoring;
+        }
+        public String toString() {
+            return "Cliente{id=" + id + ", nombre='" + nombre + "', scoring=" + scoring + '}';
+        }
+    }
+
+
     public static void main(String[] args) {
         List<Cliente> clientes = List.of(
-                new Cliente(1, "Alice", 75.5),
-                new Cliente(2, "Bob", 82.3),
-                new Cliente(3, "Charlie", 90.0),
-                new Cliente(4, "Diana", 88.1),
-                new Cliente(5, "Eve", 95.6)
+                new Cliente(1, "Ana", 75.5),
+                new Cliente(2, "Andres", 82.3),
+                new Cliente(3, "Lucas", 90.0),
+                new Cliente(4, "Carla", 88.1),
+                new Cliente(5, "Nicolas", 95.6)
         );
 
         // Llamar al método recursivo para encontrar el cliente con el scoring máximo

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Actividad4 {
+public class actividad4_encontrarNElementosMayores {
 
     public static List<Integer> encontrarElementosMayores(List<Integer> list, int n) {
         if (list.size() <= n) {
@@ -20,7 +20,7 @@ public class Actividad4 {
     private static List<Integer> unirMayores(List<Integer> izquierda, List<Integer> derecha, int n) {
         List<Integer> merged = new ArrayList<>(izquierda);
         merged.addAll(derecha);
-        Collections.sort(merged, Collections.reverseOrder());
+        merged.sort(Collections.reverseOrder());
         return merged.subList(0, n);
     }
 
@@ -31,3 +31,5 @@ public class Actividad4 {
         System.out.println("Los " + n + " números mas grandes son: " + resultado);
     }
 }
+
+//complejidad algoritmica: O(n log n) porque se divide el arreglo en mitades logarítmicas y se ordena cada mitad

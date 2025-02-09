@@ -1,0 +1,173 @@
+. Complejidad Temporal
+La complejidad temporal se refiere al tiempo que tarda el algoritmo en ejecutarse en función del tamaño de la entrada.
+
+Pasos del algoritmo:
+Ordenar las monedas: Se utiliza Arrays.sort() para ordenar el arreglo de monedas en orden descendente.
+
+La función Arrays.sort() en Java tiene una complejidad temporal de 
+O
+(
+n
+log
+⁡
+n
+)
+O(nlogn), donde 
+n
+n es el número de monedas.
+
+Recorrer las monedas: Se recorre el arreglo de monedas una vez para calcular el cambio.
+
+Este recorrido tiene una complejidad de 
+O
+(
+n
+)
+O(n), donde 
+n
+n es el número de monedas.
+
+Operaciones dentro del bucle: En cada iteración, se realizan operaciones de división y módulo, que son operaciones constantes 
+O
+(
+1
+)
+O(1).
+
+Complejidad total:
+La complejidad temporal está dominada por la operación de ordenación, que es 
+O
+(
+n
+log
+⁡
+n
+)
+O(nlogn).
+
+El recorrido del arreglo y las operaciones dentro del bucle tienen una complejidad de 
+O
+(
+n
+)
+O(n).
+
+Por lo tanto, la complejidad temporal total del algoritmo es:
+
+O
+(
+n
+log
+⁡
+n
+)
++
+O
+(
+n
+)
+=
+O
+(
+n
+log
+⁡
+n
+)
+O(nlogn)+O(n)=O(nlogn)
+2. Complejidad Espacial
+La complejidad espacial se refiere a la cantidad de memoria adicional que utiliza el algoritmo en función del tamaño de la entrada.
+
+Uso de memoria:
+Arreglo de monedas: Se utiliza un arreglo de tamaño 
+n
+n para almacenar las denominaciones de las monedas.
+
+Espacio: 
+O
+(
+n
+)
+O(n).
+
+Arreglo de contadores: Se utiliza un arreglo de tamaño 
+n
+n para almacenar la cantidad de monedas de cada tipo que se usan.
+
+Espacio: 
+O
+(
+n
+)
+O(n).
+
+Variables auxiliares: Se utilizan variables como cantidad y el índice del bucle, que ocupan espacio constante 
+O
+(
+1
+)
+O(1).
+
+Complejidad total:
+La complejidad espacial total del algoritmo es:
+
+O
+(
+n
+)
++
+O
+(
+n
+)
++
+O
+(
+1
+)
+=
+O
+(
+n
+)
+O(n)+O(n)+O(1)=O(n)
+3. Consideraciones Adicionales
+Eficiencia en la práctica:
+El algoritmo es muy eficiente en la práctica para sistemas monetarios comunes (como el de EE. UU.), donde la elección greedy siempre lleva a la solución óptima.
+
+Sin embargo, si las denominaciones de las monedas no cumplen con la propiedad greedy (por ejemplo, monedas de 1, 3 y 4 centavos), el algoritmo puede no dar la solución óptima. En esos casos, se necesitan enfoques como la programación dinámica.
+
+Escalabilidad:
+El algoritmo escala bien para un número moderado de monedas, ya que su complejidad temporal 
+O
+(
+n
+log
+⁡
+n
+)
+O(nlogn) es manejable incluso para valores grandes de 
+n
+n.
+
+Para sistemas con un número muy grande de denominaciones, la operación de ordenación puede ser el cuello de botella.
+
+Resumen del Análisis de Eficiencia
+Aspecto	Complejidad	Explicación
+Complejidad Temporal	
+O
+(
+n
+log
+⁡
+n
+)
+O(nlogn)	Dominada por la operación de ordenación del arreglo de monedas.
+Complejidad Espacial	
+O
+(
+n
+)
+O(n)	Debido al uso de arreglos para almacenar las monedas y los contadores.
+Eficiencia Práctica	Alta	Funciona bien para sistemas monetarios comunes con la propiedad greedy.
+Escalabilidad	Buena	Escala bien para un número moderado de monedas.

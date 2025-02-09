@@ -12,26 +12,12 @@ No reconsidera decisiones: Una vez que se toma una decisión, no se vuelve a eva
 
 No siempre garantiza la solución óptima global: Aunque es eficiente, no siempre encuentra la mejor solución para todos los problemas.
 
-2. Ejemplo Clásico: El Problema del Cambio (3 minutos)
-Descripción del problema: Dado un sistema monetario con monedas de diferentes denominaciones (por ejemplo, 1, 5, 10, 25 centavos), el objetivo es dar el cambio de una cantidad específica utilizando el menor número de monedas posible.
+2. Ejemplo Api Monedas (4 minutos)
+Descripción del problema: 
 
 Solución Greedy:
 
-Seleccionar siempre la moneda de mayor denominación que sea menor o igual a la cantidad restante.
 
-Restar el valor de la moneda seleccionada a la cantidad total.
-
-Repetir el proceso hasta que la cantidad restante sea cero.
-
-Ejemplo: Cambio de 36 centavos en monedas de 25, 10, 5 y 1 centavos.
-
-Seleccionar 25 centavos (restan 11 centavos).
-
-Seleccionar 10 centavos (restan 1 centavo).
-
-Seleccionar 1 centavo (restan 0 centavos).
-
-Total de monedas: 3.
 
 3. Ventajas y Desventajas (2 minutos)
 Ventajas:
@@ -63,5 +49,4 @@ Resumen: Los algoritmos greedy son una herramienta poderosa en la resolución de
 
 Reflexión Final: Es importante analizar si el problema en cuestión cumple con las propiedades necesarias para aplicar un enfoque greedy, y en caso contrario, considerar otras técnicas como programación dinámica o backtracking.
 
-7. Preguntas y Discusión (1 minuto)
-Invitar a la audiencia a hacer preguntas o compartir sus pensamientos sobre los algoritmos greedy y sus aplicaciones.
+

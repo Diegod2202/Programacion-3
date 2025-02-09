@@ -1,0 +1,67 @@
+Exposición sobre Algoritmos Greedy (Voraces)
+Duración: 15 minutos
+
+1. Introducción (2 minutos)
+Definición: Un algoritmo greedy (voraz) es una técnica de diseño de algoritmos que construye una solución paso a paso, eligiendo en cada paso la opción que parece ser la mejor en ese momento, sin considerar las consecuencias futuras.
+
+Características clave:
+
+Elección local óptima: En cada paso, el algoritmo selecciona la opción que parece ser la mejor en ese momento.
+
+No reconsidera decisiones: Una vez que se toma una decisión, no se vuelve a evaluar.
+
+No siempre garantiza la solución óptima global: Aunque es eficiente, no siempre encuentra la mejor solución para todos los problemas.
+
+2. Ejemplo Clásico: El Problema del Cambio (3 minutos)
+Descripción del problema: Dado un sistema monetario con monedas de diferentes denominaciones (por ejemplo, 1, 5, 10, 25 centavos), el objetivo es dar el cambio de una cantidad específica utilizando el menor número de monedas posible.
+
+Solución Greedy:
+
+Seleccionar siempre la moneda de mayor denominación que sea menor o igual a la cantidad restante.
+
+Restar el valor de la moneda seleccionada a la cantidad total.
+
+Repetir el proceso hasta que la cantidad restante sea cero.
+
+Ejemplo: Cambio de 36 centavos en monedas de 25, 10, 5 y 1 centavos.
+
+Seleccionar 25 centavos (restan 11 centavos).
+
+Seleccionar 10 centavos (restan 1 centavo).
+
+Seleccionar 1 centavo (restan 0 centavos).
+
+Total de monedas: 3.
+
+3. Ventajas y Desventajas (2 minutos)
+Ventajas:
+
+Simplicidad: Los algoritmos greedy son fáciles de entender e implementar.
+
+Eficiencia: Suelen ser muy rápidos y tienen una complejidad temporal baja.
+
+Desventajas:
+
+No siempre óptimos: No garantizan la solución óptima para todos los problemas.
+
+Dependencia de la elección local: La elección local óptima puede no llevar a la solución global óptima.
+
+4. Aplicaciones Comunes (3 minutos)
+Problema de la Mochila Fraccionaria: Dado un conjunto de elementos con pesos y valores, llenar una mochila con capacidad limitada maximizando el valor total. En la versión fraccionaria, se puede tomar una fracción de cada elemento.
+
+Algoritmo de Dijkstra: Encuentra el camino más corto desde un nodo origen a todos los demás nodos en un grafo con pesos no negativos.
+
+Árbol de Expansión Mínima (Algoritmo de Kruskal y Prim): Encuentra un subconjunto de aristas que forman un árbol que conecta todos los nodos con el menor costo total.
+
+5. Cuándo Usar Algoritmos Greedy (2 minutos)
+Propiedad de Elección Greedy: Si un problema tiene la propiedad de que una elección local óptima conduce a una solución global óptima, entonces un algoritmo greedy es adecuado.
+
+Subestructura Óptima: Si el problema puede descomponerse en subproblemas más pequeños, y la solución óptima del problema global se puede construir a partir de soluciones óptimas de los subproblemas.
+
+6. Conclusión (2 minutos)
+Resumen: Los algoritmos greedy son una herramienta poderosa en la resolución de problemas de optimización, especialmente cuando se busca una solución rápida y eficiente, aunque no siempre garantizan la solución óptima.
+
+Reflexión Final: Es importante analizar si el problema en cuestión cumple con las propiedades necesarias para aplicar un enfoque greedy, y en caso contrario, considerar otras técnicas como programación dinámica o backtracking.
+
+7. Preguntas y Discusión (1 minuto)
+Invitar a la audiencia a hacer preguntas o compartir sus pensamientos sobre los algoritmos greedy y sus aplicaciones.

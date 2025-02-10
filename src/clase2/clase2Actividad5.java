@@ -1,3 +1,5 @@
+package clase2;
+
 public class clase2Actividad5 {
 
     public static int sumaRecursiva(int n) {
@@ -10,3 +12,8 @@ public class clase2Actividad5 {
         System.out.println("Suma de los primeros " + n + " números: " + sumaRecursiva(n));
     }
 }
+/*
+Conclusión:
+- La función sumaRecursiva(n) tiene una complejidad temporal de O(n) debido a la cantidad de llamadas recursivas necesarias.
+- La complejidad espacial también es O(n) debido a la pila de llamadas recursivas
+*/

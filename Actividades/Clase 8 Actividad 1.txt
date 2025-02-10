@@ -1,0 +1,63 @@
+public class FloydWarshall {
+    private static final int INF = 99999;
+    private int[][] distancias;
+    private int numeroDeNodos;
+
+    public FloydWarshall(int numeroDeNodos) {
+        this.numeroDeNodos = numeroDeNodos;
+        distancias = new int[numeroDeNodos][numeroDeNodos];
+        inicializarMatriz();
+    }
+
+    private void inicializarMatriz() {
+        for (int i = 0; i < numeroDeNodos; i++) {
+            for (int j = 0; j < numeroDeNodos; j++) {
+                if (i == j) {
+                    distancias[i][j] = 0;
+                } else {
+                    distancias[i][j] = INF;
+                }
+            }
+        }
+    }
+
+    public void agregarArista(int origen, int destino, int peso) {
+        distancias[origen - 1][destino - 1] = peso;
+    }
+
+    public void ejecutarFloydWarshall() {
+        for (int k = 0; k < numeroDeNodos; k++) {
+            for (int i = 0; i < numeroDeNodos; i++) {
+                for (int j = 0; j < numeroDeNodos; j++) {
+                    if (distancias[i][k] + distancias[k][j] < distancias[i][j]) {
+                        distancias[i][j] = distancias[i][k] + distancias[k][j];
+                    }
+                }
+            }
+        }
+    }
+
+    public void imprimirMatrizDeDistancias() {
+        for (int i = 0; i < numeroDeNodos; i++) {
+            for (int j = 0; j < numeroDeNodos; j++) {
+                if (distancias[i][j] == INF) {
+                    System.out.print("INF ");
+                } else {
+                    System.out.print(distancias[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        FloydWarshall floydWarshall = new FloydWarshall(4);
+        floydWarshall.agregarArista(1, 2, 2);
+        floydWarshall.agregarArista(2, 4, 4);
+        floydWarshall.agregarArista(1, 4, 5);
+        floydWarshall.agregarArista(4, 3, 2);
+
+        floydWarshall.ejecutarFloydWarshall();
+        floydWarshall.imprimirMatrizDeDistancias();
+    }
+}

@@ -2,9 +2,9 @@ package Clase6;
 import java.util.*;
 import java.util.Objects;
 
-public class Actividad1_RedSocial {
+public class actividad1_redSocial {
     private Map<Usuario, List<Usuario>> grafo;
-    public Actividad1_RedSocial() {
+    public actividad1_redSocial() {
         grafo = new HashMap<>();
     }
 
@@ -38,7 +38,7 @@ public class Actividad1_RedSocial {
         return seguidores;
     }
 
-    public class Usuario {
+    static class Usuario {
         private int id;
         private String nombre;
 
@@ -56,31 +56,18 @@ public class Actividad1_RedSocial {
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Usuario usuario = (Usuario) o;
-            return id == usuario.id && Objects.equals(nombre, usuario.nombre);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(id, nombre);
-        }
-
-        @Override
         public String toString() {
             return nombre;
         }
     }
-    public void main(String[] args) {
-        Actividad1_RedSocial redSocial = new Actividad1_RedSocial();
+    public static void main(String[] args) {
+        actividad1_redSocial redSocial = new actividad1_redSocial();
 
-        Usuario usuario0 = new Usuario(0, "Usuario0");
-        Usuario usuario1 = new Usuario(1, "Usuario1");
-        Usuario usuario2 = new Usuario(2, "Usuario2");
-        Usuario usuario3 = new Usuario(3, "Usuario3");
-        Usuario usuario4 = new Usuario(4, "Usuario4");
+        Usuario usuario0 = new Usuario(0, "Juan");
+        Usuario usuario1 = new Usuario(1, "Micaela");
+        Usuario usuario2 = new Usuario(2, "Lucia");
+        Usuario usuario3 = new Usuario(3, "Jose");
+        Usuario usuario4 = new Usuario(4, "Belen");
 
         redSocial.agregarUsuario(usuario0);
         redSocial.agregarUsuario(usuario1);
@@ -94,10 +81,10 @@ public class Actividad1_RedSocial {
         redSocial.seguir(usuario2, usuario3);
         redSocial.seguir(usuario3, usuario4);
 
-        System.out.println("Usuario0 sigue a: " + redSocial.obtenerSeguidos(usuario0));
-        System.out.println("Usuario3 es seguido por: " + redSocial.obtenerSeguidores(usuario3));
+        System.out.println("Usuario " + usuario0.getNombre()+" sigue a: " + redSocial.obtenerSeguidos(usuario0));
+        System.out.println("Usuario " + usuario3.getNombre()+ " es seguido por: " + redSocial.obtenerSeguidores(usuario3));
 
         redSocial.dejarDeSeguir(usuario0, usuario2);
-        System.out.println("Usuario0 sigue a (después de dejar de seguir a Usuario2): " + redSocial.obtenerSeguidos(usuario0));
+        System.out.println("Usuario " + usuario0.getNombre() +" sigue a (después de dejar de seguir a Usuario " + usuario2.getNombre() + ": "+ redSocial.obtenerSeguidos(usuario0));
     }
 }

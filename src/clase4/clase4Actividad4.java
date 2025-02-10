@@ -26,3 +26,31 @@ public class clase4Actividad4 {
 
         return numeros;
     }}
+
+/* Pseudocódigo:
+
+Inicio
+    Definir lista numeros como una lista vacía
+
+    // Agregar elementos a la lista
+    Agregar 1 a numeros
+    Agregar 21 a numeros
+    Agregar 33 a numeros
+    Agregar 40 a numeros
+    Agregar 2 a numeros
+    Agregar 50 a numeros
+    Agregar 10 a numeros
+
+    // Llamada a la función para obtener los mayores
+    Escribir obtenerMayores(numeros, 5)
+Fin
+
+Función obtenerMayores(numeros, n)
+    size ← Tamaño de numeros
+
+    // Convertir lista a arreglo
+    array ← Convertir numeros a un arreglo de enteros
+
+    Retornar numeros // (Actualmente la función aún no está implementada)
+Fin Función
+*/

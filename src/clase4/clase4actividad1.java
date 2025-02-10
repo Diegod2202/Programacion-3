@@ -1,7 +1,5 @@
 package clase4;
 
-import clase2.Cliente;
-
 class Cliente1 {
     int id;
     String nombre;
@@ -19,7 +17,7 @@ class Cliente1 {
     }
 }
 
-public class MaxScoring {
+public class clase4actividad1 {
     public static Cliente1 encontrarMaxScoring(Cliente1[] clientes, int inicio, int fin) {
         // Caso base: si hay un solo cliente, es el máximo
         if (inicio == fin) {
@@ -37,16 +35,16 @@ public class MaxScoring {
 
     public static void main(String[] args) {
         // Lista de clientes
-        Cliente[] clientes = {
-                new Cliente(1, "Juan", 75),
-                new Cliente(2, "Ana", 90),
-                new Cliente(3, "Luis", 85),
-                new Cliente(4, "Maria", 95),
-                new Cliente(5, "Pedro", 88)
+        Cliente1[] clientes = {
+                new Cliente1(1, "Juan", 75),
+                new Cliente1(2, "Ana", 90),
+                new Cliente1(3, "Luis", 85),
+                new Cliente1(4, "Maria", 95),
+                new Cliente1(5, "Pedro", 88)
         };
 
         // Llamada a la función
-        Cliente clienteMaximo = encontrarMaxScoring(clientes, 0, clientes.length - 1);
+        Cliente1 clienteMaximo = encontrarMaxScoring(clientes, 0, clientes.length - 1);
         System.out.println("clase2.Cliente con máximo scoring: " + clienteMaximo);
     }
 }

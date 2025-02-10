@@ -1,33 +1,77 @@
 package Clase_6.Actividad_4;
 
-import java.util.Scanner;
+import java.util.*;
 
-public class Main {
-    public static void main(String[] args) {
+class CentroDistribucion {
+    private String nombre;
+    private Map<CentroDistribucion, Integer> rutas;
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el primer número: ");
-        int num1 = scanner.nextInt();
-        if(num1 == 0) {
-            System.out.println("El numero 0 no esta definido ni como par ni como impar.");
-            return;
-        }
-        if(num1 < 0){
-            int num = Math.abs(num1);
-            for(int i = 1; i <= num; i++){
-                if(i%2 == 0){
-                    System.out.println("-" + i + " es par.");
-                } else {
-                    System.out.println("-" +i + " es impar.");
+    public CentroDistribucion(String nombre) {
+        this.nombre = nombre;
+        this.rutas = new HashMap<>();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public Map<CentroDistribucion, Integer> getRutas() {
+        return rutas;
+    }
+
+    public void agregarRuta(CentroDistribucion destino, int tiempo) {
+        rutas.put(destino, tiempo);
+    }
+}
+
+class Dijkstra {
+    public Map<CentroDistribucion, Integer> calcularTiemposMinimos(CentroDistribucion origen) {
+        Map<CentroDistribucion, Integer> tiemposMinimos = new HashMap<>();
+        PriorityQueue<CentroDistribucion> colaPrioridad = new PriorityQueue<>(Comparator.comparingInt(tiemposMinimos::get));
+        Set<CentroDistribucion> visitados = new HashSet<>();
+
+        tiemposMinimos.put(origen, 0);
+        colaPrioridad.add(origen);
+
+        while (!colaPrioridad.isEmpty()) {
+            CentroDistribucion actual = colaPrioridad.poll();
+            visitados.add(actual);
+
+            for (Map.Entry<CentroDistribucion, Integer> entrada : actual.getRutas().entrySet()) {
+                CentroDistribucion vecino = entrada.getKey();
+                int tiempo = entrada.getValue();
+
+                if (!visitados.contains(vecino)) {
+                    int nuevoTiempo = tiemposMinimos.get(actual) + tiempo;
+                    if (nuevoTiempo < tiemposMinimos.getOrDefault(vecino, Integer.MAX_VALUE)) {
+                        tiemposMinimos.put(vecino, nuevoTiempo);
+                        colaPrioridad.add(vecino);
+                    }
                 }
             }
         }
-        for(int i = 1; i <= num1; i++){
-            if(i%2 == 0){
-                System.out.println(i + " es par.");
-            } else {
-                System.out.println(i + " es impar.");
-            }
+
+        return tiemposMinimos;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CentroDistribucion centroA = new CentroDistribucion("Centro A");
+        CentroDistribucion centroB = new CentroDistribucion("Centro B");
+        CentroDistribucion centroC = new CentroDistribucion("Centro C");
+        CentroDistribucion centroD = new CentroDistribucion("Centro D");
+
+        centroA.agregarRuta(centroB, 10);
+        centroA.agregarRuta(centroC, 15);
+        centroB.agregarRuta(centroD, 12);
+        centroC.agregarRuta(centroD, 10);
+
+        Dijkstra dijkstra = new Dijkstra();
+        Map<CentroDistribucion, Integer> tiemposMinimos = dijkstra.calcularTiemposMinimos(centroA);
+
+        for (Map.Entry<CentroDistribucion, Integer> entrada : tiemposMinimos.entrySet()) {
+            System.out.println("Tiempo mínimo desde " + centroA.getNombre() + " hasta " + entrada.getKey().getNombre() + ": " + entrada.getValue() + " minutos");
         }
     }
 }

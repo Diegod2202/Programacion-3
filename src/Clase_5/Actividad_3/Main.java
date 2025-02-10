@@ -1,46 +1,51 @@
 package Clase_5.Actividad_3;
 
-import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Comparator;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+class Elemento {
+    double peso;
+    double valor;
 
-        System.out.print("Ingrese el primer número: ");
-        double num1 = scanner.nextDouble();
-
-        System.out.print("Ingrese el segundo número: ");
-        double num2 = scanner.nextDouble();
-
-        System.out.print("Ingrese la operación (suma, resta, multiplicación, división): ");
-        String operacion = scanner.next();
-
-        double resultado;
-
-        switch (operacion) {
-            case "suma":
-                resultado = num1 + num2;
-                break;
-            case "resta":
-                resultado = num1 - num2;
-                break;
-            case "multiplicacion":
-                resultado = num1 * num2;
-                break;
-            case "division":
-                if (num2 != 0) {
-                    resultado = num1 / num2;
-                } else {
-                    System.out.println("Error: División por cero.");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Operación no válida.");
-                return;
-        }
-
-        System.out.println("El resultado de la " + operacion + " es: " + resultado);
+    public Elemento(double peso, double valor) {
+        this.peso = peso;
+        this.valor = valor;
     }
 }
 
+public class Main {
+
+    public static double maximizarValorCamion(Elemento[] elementos, double capacidad) {
+        // Calcular el valor por unidad de peso para cada elemento
+        for (Elemento elemento : elementos) {
+            elemento.valor = elemento.valor / elemento.peso;
+        }
+        Arrays.sort(elementos, new Comparator<Elemento>() {
+            @Override
+            public int compare(Elemento o1, Elemento o2) {
+                return Double.compare(o2.valor, o1.valor);
+            }
+
+            @Override
+            public boolean equals(Object obj) {
+                return false;
+            }
+        });
+
+        double valorTotal = 0;
+        double pesoActual = 0;
+
+        for (Elemento elemento : elementos) {
+            if (pesoActual + elemento.peso <= capacidad) {
+                pesoActual += elemento.peso;
+                valorTotal += elemento.valor * elemento.peso;
+            } else {
+                double pesoRestante = capacidad - pesoActual;
+                valorTotal += elemento.valor * pesoRestante;
+                break;
+            }
+        }
+
+        return valorTotal;
+    }
+}

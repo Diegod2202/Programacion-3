@@ -1,46 +1,78 @@
 package Clase_8.Actividad_3;
-
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    static final int INF = 99999;
 
-        System.out.print("Ingrese el primer número: ");
-        double num1 = scanner.nextDouble();
+    public static void floydWarshall(int[][] tiempos, int numCentros) {
+        int[][] distancias = new int[numCentros][numCentros];
+        int[][] siguiente = new int[numCentros][numCentros];
 
-        System.out.print("Ingrese el segundo número: ");
-        double num2 = scanner.nextDouble();
-
-        System.out.print("Ingrese la operación (suma, resta, multiplicación, división): ");
-        String operacion = scanner.next();
-
-        double resultado;
-
-        switch (operacion) {
-            case "suma":
-                resultado = num1 + num2;
-                break;
-            case "resta":
-                resultado = num1 - num2;
-                break;
-            case "multiplicacion":
-                resultado = num1 * num2;
-                break;
-            case "division":
-                if (num2 != 0) {
-                    resultado = num1 / num2;
-                } else {
-                    System.out.println("Error: División por cero.");
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Operación no válida.");
-                return;
+        for (int i = 0; i < numCentros; i++) {
+            for (int j = 0; j < numCentros; j++) {
+                distancias[i][j] = tiempos[i][j];
+                siguiente[i][j] = (tiempos[i][j] != INF && i != j) ? j : -1;
+            }
         }
 
-        System.out.println("El resultado de la " + operacion + " es: " + resultado);
+        for (int k = 0; k < numCentros; k++) {
+            for (int i = 0; i < numCentros; i++) {
+                for (int j = 0; j < numCentros; j++) {
+                    if (distancias[i][k] != INF && distancias[k][j] != INF &&
+                            distancias[i][k] + distancias[k][j] < distancias[i][j]) {
+                        distancias[i][j] = distancias[i][k] + distancias[k][j];
+                        siguiente[i][j] = siguiente[i][k];
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < numCentros; i++) {
+            if (distancias[i][i] < 0) {
+                System.out.println("⚠️ Se ha detectado un ciclo negativo en el centro " + (i + 1));
+                return;
+            }
+        }
+
+        System.out.println("\n🚛 Tiempos mínimos de entrega entre centros:");
+        imprimirMatriz(distancias);
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nIngrese el centro de origen (1-" + numCentros + "): ");
+        int origen = scanner.nextInt() - 1;
+        System.out.print("Ingrese el centro de destino (1-" + numCentros + "): ");
+        int destino = scanner.nextInt() - 1;
+
+        if (siguiente[origen][destino] == -1) {
+            System.out.println("No hay ruta disponible entre los centros seleccionados.");
+        } else {
+            System.out.println("\n⏳ Tiempo mínimo: " + distancias[origen][destino] + " minutos");
+            System.out.print("Ruta óptima: ");
+            imprimirCamino(origen, destino, siguiente);
+            System.out.println();
+        }
+
+        scanner.close();
+    }
+
+    public static void imprimirMatriz(int[][] matriz) {
+        for (int[] fila : matriz) {
+            for (int valor : fila) {
+                System.out.print((valor == INF ? "INF" : valor) + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void imprimirCamino(int origen, int destino, int[][] siguiente) {
+        if (siguiente[origen][destino] == -1) {
+            System.out.print("No hay camino.");
+            return;
+        }
+        System.out.print((origen + 1) + " → ");
+        while (origen != destino) {
+            origen = siguiente[origen][destino];
+            System.out.print((origen + 1) + (origen == destino ? "" : " → "));
+        }
     }
 }
-

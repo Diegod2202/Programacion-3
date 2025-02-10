@@ -1,33 +1,60 @@
 package Clase_5.Actividad_4;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
+    public static int getMinimumCost(int k, int[] c) {
+        // Ordenar el arreglo de precios en orden descendente
+        Arrays.sort(c);
+        reverseArray(c);
+
+        int totalCost = 0;
+        int purchases = 0;
+
+        // Recorrer las flores y calcular el costo total
+        for (int i = 0; i < c.length; i++) {
+            if (i % k == 0) {
+                purchases++;
+            }
+            totalCost += purchases * c[i];
+        }
+
+        return totalCost;
+    }
+
+    // Método para invertir un arreglo
+    private static void reverseArray(int[] arr) {
+        int i = 0, j = arr.length - 1;
+        while (i < j) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ingrese el primer número: ");
-        int num1 = scanner.nextInt();
-        if(num1 == 0) {
-            System.out.println("El numero 0 no esta definido ni como par ni como impar.");
-            return;
+
+        // Leer la entrada
+        int n = scanner.nextInt(); // Número de flores
+        int k = scanner.nextInt(); // Número de amigos
+
+        int[] c = new int[n]; // Precios de las flores
+        for (int i = 0; i < n; i++) {
+            c[i] = scanner.nextInt();
         }
-        if(num1 < 0){
-            int num = Math.abs(num1);
-            for(int i = 1; i <= num; i++){
-                if(i%2 == 0){
-                    System.out.println("-" + i + " es par.");
-                } else {
-                    System.out.println("-" +i + " es impar.");
-                }
-            }
-        }
-        for(int i = 1; i <= num1; i++){
-            if(i%2 == 0){
-                System.out.println(i + " es par.");
-            } else {
-                System.out.println(i + " es impar.");
-            }
-        }
+
+        // Calcular el costo mínimo
+        int minimumCost = getMinimumCost(k, c);
+
+        // Imprimir el resultado
+        System.out.println(minimumCost);
+
+        scanner.close();
     }
 }

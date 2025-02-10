@@ -1,16 +1,35 @@
 package Clase_5.Actividad_2;
 
-public class Main {
+import java.util.Arrays;
+
+public class Main{
+
+    public static int cambioMonedaExtranjera(int[] comprobantes, int valorObjetivo) {
+        int[] dp = new int[valorObjetivo + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;  // No se necesitan comprobantes para alcanzar el valor 0
+
+        for (int i = 1; i <= valorObjetivo; i++) {
+            for (int comprobante : comprobantes) {
+                if (comprobante <= i && dp[i - comprobante] != Integer.MAX_VALUE) {
+                    dp[i] = Math.min(dp[i], dp[i - comprobante] + 1);
+                }
+            }
+        }
+
+        return dp[valorObjetivo] == Integer.MAX_VALUE ? -1 : dp[valorObjetivo];
+    }
+
     public static void main(String[] args) {
+        int[] comprobantes = {1, 2, 5, 10, 20, 50, 100};
+        int valorObjetivo = 98;
 
-        int edad = 24;
-        double altura = 1.75;
-        char inicial = 'D';
-        String ciudad = "CABA";
+        int resultado = cambioMonedaExtranjera(comprobantes, valorObjetivo);
 
-        edad = edad + 5;
-        altura = altura * 2;
-        System.out.println("Tu inicial es: " + inicial);
-        System.out.println("Tu ciudad es: " + ciudad);
+        if (resultado == -1) {
+            System.out.println("No es posible alcanzar el valor objetivo con los comprobantes dados.");
+        } else {
+            System.out.println("El mínimo número de comprobantes necesarios es: " + resultado);
+        }
     }
 }

@@ -58,6 +58,15 @@ Propiedad de Elección Greedy: Si un problema tiene la propiedad de que una elec
 
 Subestructura Óptima: Si el problema puede descomponerse en subproblemas más pequeños, y la solución óptima del problema global se puede construir a partir de soluciones óptimas de los subproblemas.
 
+Función find_optimal_coins
+Descripción: Esta función encuentra las monedas óptimas para comprar con un valor dado, ordenándolas por precio de menor a mayor.
+Algoritmo: Ordena las monedas por precio utilizando la función QuickSort. Recorre las monedas ordenadas y selecciona la cantidad máxima de cada moneda que se puede comprar con el valor restante.
+Complejidad Temporal:
+Ordenar las monedas es O(n log n).
+Recorrer las monedas es O(n).
+Funcionamiento Interno: La función QuickSort se utiliza para ordenar las monedas por precio. Un bucle for recorre las monedas ordenadas, calculando la cantidad máxima de cada moneda que se puede comprar y actualizando el valor restante.
+Aplicación del Algoritmo Greedy: La función find_optimal_coins aplica el algoritmo greedy al seleccionar la cantidad máxima de cada moneda que se puede comprar con el valor restante, asegurando que siempre se elija la mejor opción local en cada paso.
+
 6. Conclusión (2 minutos)
 Resumen: Los algoritmos greedy son una herramienta poderosa en la resolución de problemas de optimización, especialmente cuando se busca una solución rápida y eficiente, aunque no siempre garantizan la solución óptima.
 

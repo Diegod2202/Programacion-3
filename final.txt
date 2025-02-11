@@ -1,0 +1,414 @@
+
+
+
+Cuestionario sin título (505394 - 2025-VERANO - NOCHE - LUN_MAR_MIE_JUE - PROGRAMACION...)
+Points:
+93%
+Correct
+1.¿ Qué es un buen algoritmo ?
+
+Un buen algoritmo debe maximizar el uso de memoria.
+
+Un buen algoritmo siempre debe ser el más largo y detallado posible.
+
+Un buen algoritmo no necesita ser entendido por otros programadores.
+
+Una meta objetiva es la eficiencia en tiempo de ejecución x
+Correct
+2.¿ Cómo se mide tipicamente el tiempo de ejecucíon de un programa T(n) ?
+
+Se mide sumando el tiempo total de compilación y ejecución.
+
+En función del tamaño de entrada n y como crece T(n) a medida que n aumenta x
+
+Se mide comparando el tiempo de ejecución con el tiempo de desarrollo.
+
+Se mide promediando el tiempo de ejecución de varias computadoras.
+Correct
+3.¿Qué describe la complejidad asintótica de un algoritmo?
+
+Describe T(n) crece en función del tamaño de n en el peor de los casos. x
+
+Describe el tiempo exacto que tarda un algoritmo en ejecutarse.
+
+Describe la cantidad de memoria que requiere un programa 
+
+Describe cómo se comporta un algoritmo para n pequeño
+Correct
+4.¿Qué describe la notación Big O en un algoritmo?
+
+La cantidad exacta de tiempo que tarda el algoritmo en ejecutarse.
+
+El tiempo que un algoritmo tarda en compilarse.
+
+El crecimiento del tiempo de ejecución en función del tamaño de la entrada. x
+
+La eficiencia del código basado en la legibilidad.
+Correct
+5.¿Qué es la recursividad en programación?
+
+Una función que se ejecuta en paralelo con otras funciones.
+
+Un ciclo que repite un bloque de código hasta una condición.
+
+Un método que solo se usa para ordenar listas de números.
+
+Una función que se llama a sí misma para resolver un problema.
+Correct
+6.¿Qué es una recurrencia en análisis de algoritmos?
+
+Una función que se ejecuta en tiempo constante.
+
+Una ecuación que define un valor basado en sus valores anteriores.
+
+Un algoritmo que se divide en subproblemas idénticos.
+
+Un ciclo que repite un bloque de código hasta una condición.
+Correct
+7.¿Qué expresa la fórmula del cálculo de recurrencia?
+
+La relación entre el tamaño del problema y su solución dividida.
+
+El número de iteraciones en un bucle for.
+
+La cantidad de memoria que usa un algoritmo.
+
+La relación entre las variables locales de una función.
+Correct
+8.¿Cuál es el objetivo principal al resolver una recurrencia?
+
+Encontrar el número de variables en el código.
+
+Maximizar el uso de memoria en el programa.
+
+Reducir la cantidad de líneas de código.
+
+Determinar el tiempo de ejecución total del algoritmo.
+Correct
+9.¿Qué es "Divide y Conquista" en la algoritmia?
+
+Divide la memoria para que un algoritmo sea más eficiente.
+
+Divide un programa en módulos para facilitar su lectura.
+
+Estrategia que divide un problema y combina soluciones parciales.
+
+Divide el tiempo de ejecución de un algoritmo para mejorarlo.
+Correct
+10.¿Qué es la "Búsqueda Binaria" en algoritmia?
+
+Busca en una lista secuencialmente, elemento por elemento.
+
+Algoritmo que busca dividiendo el rango en mitades sucesivas.
+
+Encuentra un valor buscando simultáneamente en todos los elementos.
+
+Algoritmo que organiza datos antes de buscar un elemento.
+Correct
+11.¿Qué orden de complejidad tiene la Búsqueda Binaria?
+
+O(n)
+
+O(log n)
+
+O(n^2)
+
+O(n log n)
+Correct
+12.¿Qué es Quicksort en la algoritmia?
+
+Un algoritmo que busca el valor máximo en una lista desordenada.
+
+Un método para combinar dos listas ordenadas en una sola lista ordenada.
+
+Un algoritmo de ordenamiento basado en la técnica de divide y conquista.
+
+Un algoritmo que encuentra la mediana en una lista de números.
+Correct
+13.¿Cómo funciona Quicksort?
+
+Ordena los elementos de la lista en una sola pasada.
+
+Fusiona dos listas ordenadas en una lista más grande.
+
+Compara cada elemento con todos los demás para ordenarlos.
+
+Divide la lista y ordena recursivamente las sublistas.
+Correct
+14.¿Cuál es el orden de complejidad promedio de Quicksort?
+
+O(n^2)
+
+O(n^3)
+
+O(log n)
+
+O(n log n)
+Correct
+15.¿Cómo funciona MergeSort?
+
+Ordena la lista en una sola pasada usando un pivote central.
+
+Divide la lista, ordena sublistas y luego las fusiona.
+
+Ordena los elementos comparando pares consecutivos
+
+Busca el menor elemento y lo coloca al principio repetidamente.
+Correct
+16.¿Cuál es la complejidad de MergeSort?
+
+O(n²)
+
+O(log n)
+
+O(n log n)
+
+O(n)
+Correct
+17.¿Cuándo usar Quicksort en vez de MergeSort?
+
+Cuando se requiere garantizar un rendimiento constante en todos los casos.
+
+Cuando se necesita un algoritmo rápido con menos uso de memoria.
+
+Cuando se trabaja con listas que ya están casi ordenadas.
+
+Cuando se necesita combinar varias listas ordenadas en una sola.
+Correct
+18.¿ Que es un algoritmo greedy ?
+
+Un algoritmo que busca todas las soluciones posibles
+
+Un algoritmo que toma decisiones locales óptimas
+
+Un algoritmo que usa programación dinámica
+
+Un algoritmo que garantiza la solución global óptima
+Correct
+19.¿Qué caracteriza a un algoritmo greedy?
+
+Siempre encuentra la solución óptima
+
+Revisa todas las combinaciones posibles
+
+Toma la decisión óptima en cada paso
+
+Usa programación dinámica
+Correct
+20.¿Cuál es el objetivo de un algoritmo greedy?
+
+Maximizar los errores
+
+Minimizar los recursos
+
+Optimizar localmente en cada paso
+
+Buscar la solución más rápida
+Correct
+21.¿En qué tipo de problemas se usan algoritmos greedy?
+
+Donde la solución global es más rápida
+
+Donde la solución óptima requiere todas las combinaciones
+
+Donde la solución global es difícil de encontrar
+
+Donde la solución local lleva a la global óptima
+Correct
+22.¿Qué garantiza la correcta aplicación de un algoritmo greedy?
+
+Solución siempre óptima
+
+Existencia de subestructuras óptimas
+
+Complejidad espacial mínima
+
+Unicidad de la solución
+Correct
+23.¿Qué algoritmo se usa para encontrar el árbol de recubrimiento mínimo en un grafo conectado y no dirigido?
+
+Algoritmo de Bellman-Ford
+
+Algoritmo de Floyd-Warshall
+
+Algoritmo de Tarjan
+
+Algoritmo de Kruskal
+Correct
+24.¿Cuándo es más eficiente usar el algoritmo de Prim para encontrar un árbol de recubrimiento mínimo?
+
+Cuando el grafo es muy disperso y el número de aristas es mucho menor que
+
+Cuando se requiere una solución en tiempo constante
+
+Cuando el grafo es muy denso y el número de aristas es cercano a V^2
+
+Cuando el grafo tiene un número muy pequeño de vértices
+Correct
+25.¿Cuándo es más eficiente usar el algoritmo de Kruskal para encontrar un árbol de recubrimiento mínimo?
+
+Cuando el grafo es muy denso y el número de aristas es cercano a V^2
+
+Cuando grafo es muy disperso y el número de aristas es mucho menor que V^2
+
+Cuando se requiere una solución en tiempo constante.
+
+Cuando el grafo tiene un número muy pequeño de aristas.
+Incorrect
+26.¿Cuál es el algoritmo más adecuado para encontrar el camino más corto desde un solo vértice a todos los demás ?
+
+Algoritmo de Prim
+
+Algoritmo de Dijkstra
+
+Algoritmo de Kruskal
+
+Método de burbuja
+Correct
+27.¿Cuál de las siguientes opciones describe correctamente un grafo dirigido?
+
+Un conjunto de vértices conectados por aristas bidireccionales
+
+Un grafo donde no existen ciclos
+
+Un grafo con pesos en todas sus aristas
+
+Un grafo con aristas que tienen un sentido o dirección
+Incorrect
+28.¿Cuál de las siguientes opciones describe un ciclo en un grafo?
+
+Un camino que pasa por todos los vértices del grafo
+
+Un subgrafo que incluye todos los vértices del grafo
+
+Un camino que conecta dos vértices sin pasar por el mismo vértice dos veces
+
+Un camino que comienza y termina en el mismo vértice sin repetir aristas
+Correct
+29.¿Cómo se representa una lista de adyacencia para un grafo no dirigido?
+
+Solo se almacenan las aristas salientes
+
+Se ignoran las aristas de menor peso
+
+Se almacenan aristas de entrada y salida
+
+Se almacena solo el nodo con el mayor grado
+Correct
+30.¿Qué es un grafo ponderado?
+
+Un grafo donde cada vértice tiene un peso asociado
+
+Un grafo donde las aristas tienen direcciones específicas
+
+Un grafo que solo tiene ciclos
+
+Un grafo donde cada arista tiene un peso o costo asociado
+Correct
+31.¿Cuál algoritmo encuentra un árbol de recubrimiento mínimo en un grafo ponderado?
+
+Algoritmo de Dijkstra
+
+Algoritmo de Kruskal
+
+Algoritmo de Floyd-Warshall
+
+Algoritmo de Bellman-Ford
+Correct
+32.¿Qué tipo de problema resuelve el algoritmo de Prim en un grafo ponderado?
+
+Encontrar la ruta más corta entre dos nodos
+
+Detectar ciclos en un grafo
+
+Encontrar un árbol de recubrimiento mínimo
+
+Ordenar los nodos en un grafo
+Correct
+33.¿Cuál de las siguientes afirmaciones describe mejor la técnica de Programación Dinámica?
+
+
+Se utiliza cuando los subproblemas se resuelven de forma independiente y en paralelo.
+
+Se utiliza cuando los subproblemas se resuelven de forma independiente y en paralelo.
+
+Resuelve problemas dividiéndolos en subproblemas más pequeños y almacena sus soluciones para evitar cálculos repetidos.
+
+Se utiliza cuando los subproblemas se resuelven de forma independiente y en paralelo.
+Correct
+34.¿Cuál de los siguientes problemas puede resolverse de manera eficiente utilizando Programación Dinámica?
+
+
+Búsqueda Binaria.
+
+Ordenamiento por Burbuja.
+
+Problema de la Mochila (Knapsack Problem).
+
+Búsqueda en Profundidad (DFS).
+Correct
+35.¿Cuál es un enfoque común al aplicar Programación Dinámica para resolver problemas?
+
+Dividir el problema en subproblemas y resolverlos recursivamente sin almacenar resultados.
+
+Dividir el problema en subproblemas más pequeños y resolver cada uno solo una vez, almacenando los resultados.
+
+Resolver cada subproblema de manera independiente y combinarlos al final.
+
+Probar todas las posibles soluciones y elegir la mejor opción en cada paso.
+Correct
+36.¿Cuál suele ser la complejidad temporal de un algoritmo de Programación Dinámica en comparación con uno de fuerza bruta?
+
+Siempre es más lento que un algoritmo de fuerza bruta.
+
+Siempre es O(1), ya que almacena los resultados
+
+Suele ser más eficiente, ya que reduce la complejidad exponencial de O(2^n) a la polinómica O(n^2) o O(n*m) en muchos problemas
+
+Es igual de ineficiente que un algoritmo de fuerza bruta.
+Correct
+37.¿Cuál es la complejidad temporal del algoritmo de Floyd-Warshall para encontrar las distancias más cortas entre todos los pares de nodos en un grafo?
+
+O(V*E) donde V es el número de vértices y E es el número de aritas.
+
+O(V^3) ya que utiliza tres bucles anidados para recorrer todos los pares de nodos y actualizar las distancias más cortas.
+
+O(V^2) porque solo recorre los vértices y actualiza las distancias una vez.
+
+O(E^2) ya que depende del número de aristas en el grafo.
+Correct
+38.¿Qué problema resuelve el algoritmo de Floyd-Warshall?
+
+
+Encuentra el árbol de recubrimiento mínimo.
+
+Encuentra el ciclo hamiltoniano en un grafo.
+
+Encuentra la ruta más corta entre todos los pares de nodos en un grafo
+
+Encuentra la ruta más corta desde un nodo fuente a todos los demás nodos.
+Incorrect
+39.¿Cuál de las siguientes afirmaciones es cierta sobre el algoritmo de Floyd-Warshall?
+
+Solo funciona en grafos sin ciclos.
+
+Solo funciona en grafos no dirigidos.
+
+Detecta la presencia de ciclos negativos en el grafo.
+
+Detecta la presencia de ciclos negativos en el grafo.
+Correct
+40.¿Qué estructura de datos se utiliza para almacenar las distancias entre pares de nodos en el algoritmo de Floyd-Warshall?
+
+Lista de adyacencia.
+
+Árbol binario.
+
+Matriz de adyacencia.
+
+Cola de prioridad.
+Go back to thank you page
+Microsoft 365
+This content is created by the owner of the form. The data you submit will be sent to the form owner. Microsoft is not responsible for the privacy or security practices of its customers, including those of this form owner. Never give out your password.
+Microsoft Forms | AI-Powered surveys, quizzes and pollsCreate my own form
+Privacy and cookies | Terms of use

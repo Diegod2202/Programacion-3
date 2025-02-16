@@ -1,0 +1,75 @@
+1. Introducción (2 minutos)
+Contexto del proyecto: Explicar brevemente el propósito del proyecto y su relevancia.
+
+¿Qué es Neo4j? (Base de datos de grafos).
+
+¿Por qué integrar Python con Neo4j? (Facilidad de uso, análisis de datos, aplicaciones en grafos).
+
+Objetivo del proyecto: ¿Qué se busca lograr con esta integración?
+
+2. Descripción del proyecto (3 minutos)
+Estructura del repositorio:
+
+Explicar la organización de los archivos (scripts, datos, documentación).
+
+Destacar los archivos principales (por ejemplo, main.py, queries.py, etc.).
+
+Tecnologías utilizadas:
+
+Python (lenguaje principal).
+
+Neo4j (base de datos de grafos).
+
+Librerías como neo4j (driver oficial) o py2neo.
+
+3. Funcionalidades clave (4 minutos)
+Conexión a Neo4j:
+
+Mostrar cómo se establece la conexión desde Python a la base de datos Neo4j.
+
+Ejemplo de código: driver = GraphDatabase.driver(uri, auth=(user, password)).
+
+Creación de nodos y relaciones:
+
+Explicar cómo se crean nodos y relaciones en el grafo.
+
+Ejemplo: Crear un nodo "Persona" y una relación "AMIGO_DE".
+
+Consultas (queries):
+
+Mostrar ejemplos de consultas típicas en Neo4j (por ejemplo, encontrar relaciones entre nodos).
+
+Ejemplo de consulta: MATCH (p:Persona)-[:AMIGO_DE]->(amigo) RETURN p, amigo.
+
+Visualización de datos:
+
+Si el proyecto incluye visualización de grafos, explicar cómo se hace (por ejemplo, usando librerías como matplotlib o herramientas de Neo4j como Bloom).
+
+4. Demostración práctica (3 minutos)
+Ejecución del código:
+
+Mostrar en vivo o con capturas de pantalla cómo se ejecuta el código.
+
+Ejemplo: Crear un grafo simple y realizar una consulta.
+
+Resultados obtenidos:
+
+Mostrar los resultados de las consultas (nodos, relaciones, etc.).
+
+Si hay visualización, mostrar cómo se ve el grafo.
+
+5. Aplicaciones y conclusiones (3 minutos)
+Casos de uso:
+
+Aplicaciones prácticas del proyecto (análisis de redes sociales, recomendaciones, sistemas de ruteo, etc.).
+
+
+6. Preguntas y respuestas (opcional, si hay tiempo)
+Invitar a la audiencia a hacer preguntas sobre el proyecto.
+
+Recomendaciones adicionales
+Preparar diapositivas: Usa herramientas como PowerPoint, Google Slides o Canva para crear una presentación visual.
+
+Practicar: Asegúrate de cronometrar la presentación para que no exceda los 15 minutos.
+
+Incluir ejemplos visuales: Si es posible, muestra gráficos, diagramas o capturas de pantalla del proyecto en funcionamiento.

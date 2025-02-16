@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interfaz de Usuario para Neo4j</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Enlaza el archivo CSS -->
+  </head>
+  <body>
+    <div class="container">
+      <h1>Interfaz de Usuario para Neo4j</h1>
+
+      <!-- Formulario para crear una persona -->
+      <div class="card">
+        <h2>Crear Persona</h2>
+        <div class="form-group">
+          <label for="createName">Nombre:</label>
+          <input type="text" id="createName" placeholder="Ingrese el nombre" />
+        </div>
+        <div class="form-group">
+          <label for="createAge">Edad:</label>
+          <input type="number" id="createAge" placeholder="Ingrese la edad" />
+        </div>
+        <button onclick="createPerson()">Crear Persona</button>
+      </div>
+
+      <!-- Formulario para actualizar la edad de una persona -->
+      <div class="card">
+        <h2>Actualizar Edad</h2>
+        <div class="form-group">
+          <label for="updateName">Nombre:</label>
+          <input type="text" id="updateName" placeholder="Ingrese el nombre" />
+        </div>
+        <div class="form-group">
+          <label for="updateAge">Edad:</label>
+          <input
+            type="number"
+            id="updateAge"
+            placeholder="Ingrese la nueva edad"
+          />
+        </div>
+        <button onclick="updatePerson()">Actualizar Edad</button>
+      </div>
+
+      <!-- Formulario para eliminar una persona -->
+      <div class="card">
+        <h2>Eliminar Persona</h2>
+        <div class="form-group">
+          <label for="deleteName">Nombre:</label>
+          <input type="text" id="deleteName" placeholder="Ingrese el nombre" />
+        </div>
+        <button onclick="deletePerson()">Eliminar Persona</button>
+      </div>
+
+      <!-- Formulario para obtener datos de una persona -->
+      <div class="card">
+        <h2>Buscar Persona</h2>
+        <div class="form-group">
+          <label for="searchName">Nombre:</label>
+          <input
+            type="text"
+            id="searchName"
+            placeholder="Ingrese el nombre a buscar"
+          />
+        </div>
+        <button onclick="getPerson()">Buscar Persona</button>
+      </div>
+
+      <!-- Sección para mostrar resultados -->
+      <div class="card result">
+        <h2>Resultados</h2>
+        <div id="result"></div>
+      </div>
+    </div>
+
+    <script>
+      const apiUrl = "http://127.0.0.1:5000"; // Cambia esto si tu API está en otro lugar
+
+      async function createPerson() {
+        const name = document.getElementById("createName").value;
+        const age = document.getElementById("createAge").value;
+
+        try {
+          const response = await fetch(`${apiUrl}/person`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, age }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Error al crear la persona");
+          }
+
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      async function updatePerson() {
+        const name = document.getElementById("updateName").value;
+        const age = document.getElementById("updateAge").value;
+
+        try {
+          const response = await fetch(`${apiUrl}/person`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, age }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Error al actualizar la persona");
+          }
+
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      async function deletePerson() {
+        const name = document.getElementById("deleteName").value;
+
+        try {
+          const response = await fetch(`${apiUrl}/person?name=${name}`, {
+            method: "DELETE",
+          });
+
+          if (!response.ok) {
+            throw new Error("Error al eliminar la persona");
+          }
+
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      async function getPerson() {
+        const name = document.getElementById("searchName").value;
+
+        try {
+          const response = await fetch(`${apiUrl}/person?name=${name}`);
+
+          if (!response.ok) {
+            if (response.status === 404) {
+              displayResult({ error: "Persona no encontrada" });
+            } else {
+              throw new Error("Error al buscar la persona");
+            }
+            return;
+          }
+
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      function displayResult(data) {
+        const resultDiv = document.getElementById("result");
+        if (data.error) {
+          resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
+        } else if (Array.isArray(data)) {
+          resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        } else {
+          resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+      }
+    </script>
+  </body>
+</html>

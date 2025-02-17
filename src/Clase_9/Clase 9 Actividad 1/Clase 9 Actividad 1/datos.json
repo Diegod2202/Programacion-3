@@ -1,0 +1,22 @@
+[
+    {"simbolo": "AAPL", "dia": 1, "precio": 150.0},
+    {"simbolo": "AAPL", "dia": 2, "precio": 155.0},
+    {"simbolo": "AAPL", "dia": 3, "precio": 152.0},
+    {"simbolo": "AAPL", "dia": 4, "precio": 160.0},
+    {"simbolo": "AAPL", "dia": 5, "precio": 158.0},
+    {"simbolo": "GOOGL", "dia": 1, "precio": 2800.0},
+    {"simbolo": "GOOGL", "dia": 2, "precio": 2850.0},
+    {"simbolo": "GOOGL", "dia": 3, "precio": 2820.0},
+    {"simbolo": "GOOGL", "dia": 4, "precio": 2900.0},
+    {"simbolo": "GOOGL", "dia": 5, "precio": 2875.0},
+    {"simbolo": "MSFT", "dia": 1, "precio": 300.0},
+    {"simbolo": "MSFT", "dia": 2, "precio": 310.0},
+    {"simbolo": "MSFT", "dia": 3, "precio": 305.0},
+    {"simbolo": "MSFT", "dia": 4, "precio": 315.0},
+    {"simbolo": "MSFT", "dia": 5, "precio": 312.0},
+    {"simbolo": "AMZN", "dia": 1, "precio": 3400.0},
+    {"simbolo": "AMZN", "dia": 2, "precio": 3450.0},
+    {"simbolo": "AMZN", "dia": 3, "precio": 3420.0},
+    {"simbolo": "AMZN", "dia": 4, "precio": 3500.0},
+    {"simbolo": "AMZN", "dia": 5, "precio": 3475.0}
+]

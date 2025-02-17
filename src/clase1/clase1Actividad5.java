@@ -1,4 +1,6 @@
- class vehiculo{
+package clase1;
+
+class vehiculo{
         private String marca;
         private String modelo;
         private String matricula;

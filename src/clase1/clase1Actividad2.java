@@ -1,3 +1,5 @@
+package clase1;
+
 public class clase1Actividad2 {
     public static void main(String[] args) {
         int edad = 26;

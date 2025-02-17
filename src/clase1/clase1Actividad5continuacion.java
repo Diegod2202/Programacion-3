@@ -1,3 +1,5 @@
+package clase1;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ abstract class Vehiculo {
     }
 }
 
-// Clase Auto que hereda de Vehiculo
+// Clase clase1.Auto que hereda de clase1.Vehiculo
 class Auto extends Vehiculo {
     private int cantidadDePuertas;
 
@@ -39,7 +41,7 @@ class Auto extends Vehiculo {
     }
 }
 
-// Clase Camion que hereda de Vehiculo
+// Clase clase1.Camion que hereda de clase1.Vehiculo
 class Camion extends Vehiculo {
     private double capacidadDeCarga; // en toneladas
 
@@ -55,7 +57,7 @@ class Camion extends Vehiculo {
     }
 }
 
-// Clase Moto que hereda de Vehiculo
+// Clase clase1.Moto que hereda de clase1.Vehiculo
 class Moto extends Vehiculo {
     private String tipoDeMoto;
 
@@ -67,7 +69,7 @@ class Moto extends Vehiculo {
     @Override
     public void mostrarInformacion() {
         mostrarDatosBase();
-        System.out.println("Tipo de moto: " + tipoDeMoto);
+        System.out.println("Tipo de clase1.moto: " + tipoDeMoto);
     }
 }
 

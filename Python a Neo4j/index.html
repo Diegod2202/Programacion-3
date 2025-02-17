@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interfaz de Usuario para Neo4j</title>
     <link rel="stylesheet" href="styles.css" />
-    <!-- Enlaza el archivo CSS -->
   </head>
   <body>
     <div class="container">
       <h1>Interfaz de Usuario para Neo4j</h1>
-
+      <div class="card result">
+        <h2>Resultados</h2>
+        <div id="result"></div>
+      </div>
       <!-- Formulario para crear una persona -->
       <div class="card">
         <h2>Crear Persona</h2>
@@ -18,68 +20,102 @@
           <label for="createName">Nombre:</label>
           <input type="text" id="createName" placeholder="Ingrese el nombre" />
         </div>
-        <div class="form-group">
-          <label for="createAge">Edad:</label>
-          <input type="number" id="createAge" placeholder="Ingrese la edad" />
-        </div>
         <button onclick="createPerson()">Crear Persona</button>
       </div>
 
-      <!-- Formulario para actualizar la edad de una persona -->
+      <!-- Formulario para crear una amistad -->
       <div class="card">
-        <h2>Actualizar Edad</h2>
+        <h2>Crear Amistad</h2>
         <div class="form-group">
-          <label for="updateName">Nombre:</label>
-          <input type="text" id="updateName" placeholder="Ingrese el nombre" />
-        </div>
-        <div class="form-group">
-          <label for="updateAge">Edad:</label>
-          <input
-            type="number"
-            id="updateAge"
-            placeholder="Ingrese la nueva edad"
-          />
-        </div>
-        <button onclick="updatePerson()">Actualizar Edad</button>
-      </div>
-
-      <!-- Formulario para eliminar una persona -->
-      <div class="card">
-        <h2>Eliminar Persona</h2>
-        <div class="form-group">
-          <label for="deleteName">Nombre:</label>
-          <input type="text" id="deleteName" placeholder="Ingrese el nombre" />
-        </div>
-        <button onclick="deletePerson()">Eliminar Persona</button>
-      </div>
-
-      <!-- Formulario para obtener datos de una persona -->
-      <div class="card">
-        <h2>Buscar Persona</h2>
-        <div class="form-group">
-          <label for="searchName">Nombre:</label>
+          <label for="friend1">Persona 1:</label>
           <input
             type="text"
-            id="searchName"
-            placeholder="Ingrese el nombre a buscar"
+            id="friend1"
+            placeholder="Nombre de la persona 1"
           />
         </div>
-        <button onclick="getPerson()">Buscar Persona</button>
+        <div class="form-group">
+          <label for="friend2">Persona 2:</label>
+          <input
+            type="text"
+            id="friend2"
+            placeholder="Nombre de la persona 2"
+          />
+        </div>
+        <button onclick="createFriendship()">Crear Amistad</button>
+      </div>
+
+      <!-- Formulario para obtener amigos -->
+      <div class="card">
+        <h2>Buscar Amigos</h2>
+        <div class="form-group">
+          <label for="searchName">Nombre:</label>
+          <input type="text" id="searchName" placeholder="Ingrese el nombre" />
+        </div>
+        <button onclick="getFriends()">Buscar Amigos</button>
+      </div>
+
+      <!-- Formulario para Backtracking -->
+      <div class="card">
+        <h2>Backtracking (Amistades Indirectas)</h2>
+        <div class="form-group">
+          <label for="backtrackingName">Nombre:</label>
+          <input
+            type="text"
+            id="backtrackingName"
+            placeholder="Ingrese el nombre"
+          />
+        </div>
+        <button onclick="backtracking()">Buscar Amistades Indirectas</button>
+      </div>
+
+      <!-- Formulario para BFS -->
+      <div class="card">
+        <h2>BFS (Recorrido en Amplitud)</h2>
+        <div class="form-group">
+          <label for="bfsName">Nombre:</label>
+          <input type="text" id="bfsName" placeholder="Ingrese el nombre" />
+        </div>
+        <button onclick="bfs()">Ejecutar BFS</button>
+      </div>
+
+      <!-- Formulario para DFS -->
+      <div class="card">
+        <h2>DFS (Recorrido en Profundidad)</h2>
+        <div class="form-group">
+          <label for="dfsName">Nombre:</label>
+          <input type="text" id="dfsName" placeholder="Ingrese el nombre" />
+        </div>
+        <button onclick="dfs()">Ejecutar DFS</button>
+      </div>
+
+      <!-- Formulario para Camino Más Corto -->
+      <div class="card">
+        <h2>Camino Más Corto</h2>
+        <div class="form-group">
+          <label for="startName">Inicio:</label>
+          <input type="text" id="startName" placeholder="Nombre de inicio" />
+        </div>
+        <div class="form-group">
+          <label for="endName">Fin:</label>
+          <input type="text" id="endName" placeholder="Nombre de fin" />
+        </div>
+        <button onclick="shortestPath()">Buscar Camino Más Corto</button>
       </div>
 
       <!-- Sección para mostrar resultados -->
-      <div class="card result">
-        <h2>Resultados</h2>
-        <div id="result"></div>
-      </div>
     </div>
 
     <script>
-      const apiUrl = "http://127.0.0.1:5000"; // Cambia esto si tu API está en otro lugar
+      const apiUrl = "http://127.0.0.1:5000"; // URL del backend Flask
 
+      // Crear una persona
       async function createPerson() {
         const name = document.getElementById("createName").value;
-        const age = document.getElementById("createAge").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
 
         try {
           const response = await fetch(`${apiUrl}/person`, {
@@ -87,7 +123,7 @@
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name, age }),
+            body: JSON.stringify({ name }),
           });
 
           if (!response.ok) {
@@ -101,21 +137,26 @@
         }
       }
 
-      async function updatePerson() {
-        const name = document.getElementById("updateName").value;
-        const age = document.getElementById("updateAge").value;
+      // Crear una amistad
+      async function createFriendship() {
+        const name1 = document.getElementById("friend1").value;
+        const name2 = document.getElementById("friend2").value;
+        if (!name1 || !name2) {
+          alert("Ambos nombres son requeridos");
+          return;
+        }
 
         try {
-          const response = await fetch(`${apiUrl}/person`, {
-            method: "PUT",
+          const response = await fetch(`${apiUrl}/friendship`, {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ name, age }),
+            body: JSON.stringify({ name1, name2 }),
           });
 
           if (!response.ok) {
-            throw new Error("Error al actualizar la persona");
+            throw new Error("Error al crear la amistad");
           }
 
           const data = await response.json();
@@ -125,40 +166,16 @@
         }
       }
 
-      async function deletePerson() {
-        const name = document.getElementById("deleteName").value;
-
-        try {
-          const response = await fetch(`${apiUrl}/person?name=${name}`, {
-            method: "DELETE",
-          });
-
-          if (!response.ok) {
-            throw new Error("Error al eliminar la persona");
-          }
-
-          const data = await response.json();
-          displayResult(data);
-        } catch (error) {
-          displayResult({ error: error.message });
-        }
-      }
-
-      async function getPerson() {
+      // Obtener amigos de una persona
+      async function getFriends() {
         const name = document.getElementById("searchName").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
 
         try {
-          const response = await fetch(`${apiUrl}/person?name=${name}`);
-
-          if (!response.ok) {
-            if (response.status === 404) {
-              displayResult({ error: "Persona no encontrada" });
-            } else {
-              throw new Error("Error al buscar la persona");
-            }
-            return;
-          }
-
+          const response = await fetch(`${apiUrl}/friends?name=${name}`);
           const data = await response.json();
           displayResult(data);
         } catch (error) {
@@ -166,12 +183,82 @@
         }
       }
 
+      // Backtracking: Encontrar todas las amistades indirectas
+      async function backtracking() {
+        const name = document.getElementById("backtrackingName").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
+
+        try {
+          const response = await fetch(`${apiUrl}/backtracking?name=${name}`);
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      // BFS: Recorrido en amplitud
+      async function bfs() {
+        const name = document.getElementById("bfsName").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
+
+        try {
+          const response = await fetch(`${apiUrl}/bfs?name=${name}`);
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      // DFS: Recorrido en profundidad
+      async function dfs() {
+        const name = document.getElementById("dfsName").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
+
+        try {
+          const response = await fetch(`${apiUrl}/dfs?name=${name}`);
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      // Camino más corto entre dos personas
+      async function shortestPath() {
+        const start = document.getElementById("startName").value;
+        const end = document.getElementById("endName").value;
+        if (!start || !end) {
+          alert("Ambos nombres son requeridos");
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `${apiUrl}/shortest-path?start=${start}&end=${end}`
+          );
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      // Mostrar resultados en la interfaz
       function displayResult(data) {
         const resultDiv = document.getElementById("result");
         if (data.error) {
           resultDiv.innerHTML = `<p class="error">${data.error}</p>`;
-        } else if (Array.isArray(data)) {
-          resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
         } else {
           resultDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
         }

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from neo4j import GraphDatabase
+from collections import deque
 
 app = Flask(__name__)
 CORS(app)
@@ -50,90 +51,90 @@ class Neo4jCRUD:
         result = tx.run(query, name=name)
         return [record["friend"] for record in result]
 
-    # Backtracking: Encontrar todas las amistades indirectas
-    def find_all_friends(self, name):
-        with self.driver.session() as session:
-            return session.execute_read(self._find_all_friends, name)
-
-    @staticmethod
-    def _find_all_friends(tx, name, visited=None):
-        if visited is None:
-            visited = set()
-        visited.add(name)
-        query = """
-        MATCH (p:Person {name: $name})-[:FRIEND]->(friend)
-        RETURN friend
-        """
-        result = tx.run(query, name=name)
-        friends = [record["friend"]["name"] for record in result]
-        for friend in friends:
-            if friend not in visited:
-                visited.update(Neo4jCRUD._find_all_friends(tx, friend, visited))
-        return list(visited)
-
-    # BFS: Recorrido en amplitud
-    def bfs(self, start_name):
-        with self.driver.session() as session:
-            return session.execute_read(self._bfs, start_name)
-
-    @staticmethod
-    def _bfs(tx, start_name):
-        visited = set()
-        queue = [start_name]
-        while queue:
-            name = queue.pop(0)
-            if name not in visited:
-                visited.add(name)
-                query = """
-                MATCH (p:Person {name: $name})-[:FRIEND]->(friend)
-                RETURN friend
-                """
-                result = tx.run(query, name=name)
-                for record in result:
-                    friend_name = record["friend"]["name"]
-                    if friend_name not in visited:
-                        queue.append(friend_name)
-        return list(visited)
-
-    # DFS: Recorrido en profundidad
-    def dfs(self, start_name):
-        with self.driver.session() as session:
-            return session.execute_read(self._dfs, start_name)
-
-    @staticmethod
-    def _dfs(tx, start_name, visited=None):
-        if visited is None:
-            visited = set()
-        visited.add(start_name)
-        query = """
-        MATCH (p:Person {name: $start_name})-[:FRIEND]->(friend)
-        RETURN friend
-        """
-        result = tx.run(query, start_name=start_name)
-        for record in result:
-            friend_name = record["friend"]["name"]
-            if friend_name not in visited:
-                Neo4jCRUD._dfs(tx, friend_name, visited)
-        return list(visited)
-
-    # Poda: Camino más corto entre dos personas
     def shortest_path(self, start_name, end_name):
         with self.driver.session() as session:
-            return session.execute_read(self._shortest_path, start_name, end_name)
+            # Obtener todos los datos de amistades
+            query = """
+            MATCH (p:Person)-[:FRIEND]->(friend:Person)
+            RETURN p.name AS person, friend.name AS friend
+            """
+            result = session.run(query)
+            
+            # Construir el grafo en Python
+            graph = {}
+            for record in result:
+                person = record["person"]
+                friend = record["friend"]
+                if person not in graph:
+                    graph[person] = []
+                if friend not in graph:
+                    graph[friend] = []
+                graph[person].append(friend)
+            
+            # Implementar BFS para encontrar el camino más corto
+            def bfs(graph, start, end):
+                queue = deque([(start, [start])])  # (nodo, camino)
+                visited = set()
+                
+                while queue:
+                    node, path = queue.popleft()
+                    if node == end:
+                        return path
+                    if node not in visited:
+                        visited.add(node)
+                        for neighbor in graph.get(node, []):
+                            queue.append((neighbor, path + [neighbor]))
+                return None
+            
+            # Ejecutar BFS
+            return bfs(graph, start_name, end_name)
 
-    @staticmethod
-    def _shortest_path(tx, start_name, end_name):
-        query = """
-        MATCH (start:Person {name: $start_name}), (end:Person {name: $end_name}),
-              path = shortestPath((start)-[:FRIEND*]-(end))
-        RETURN path
-        """
-        result = tx.run(query, start_name=start_name, end_name=end_name)
-        record = result.single()
-        if record:
-            return [node["name"] for node in record["path"].nodes]
-        else:
-            return None
+    def suggest_friends(self, name):
+        with self.driver.session() as session:
+            # Obtener todos los datos de amistades
+            query = """
+            MATCH (p:Person)-[:FRIEND]->(friend:Person)
+            RETURN p.name AS person, friend.name AS friend
+            """
+            result = session.run(query)
+            
+            # Construir el grafo en Python
+            graph = {}
+            for record in result:
+                person = record["person"]
+                friend = record["friend"]
+                if person not in graph:
+                    graph[person] = []
+                if friend not in graph:
+                    graph[friend] = []
+                graph[person].append(friend)
+            
+            # Obtener amigos directos
+            direct_friends_query = """
+            MATCH (p:Person {name: $name})-[:FRIEND]->(friend:Person)
+            RETURN friend.name AS friend
+            """
+            direct_friends_result = session.run(direct_friends_query, name=name)
+            direct_friends = {record["friend"] for record in direct_friends_result}
+            
+            # Implementar DFS para encontrar amigos de amigos
+            def dfs(graph, node, depth, visited=None):
+                if visited is None:
+                    visited = set()
+                visited.add(node)
+                if depth == 0:
+                    return visited
+                for neighbor in graph.get(node, []):
+                    if neighbor not in visited:
+                        dfs(graph, neighbor, depth - 1, visited)
+                return visited
+            
+            # Ejecutar DFS con profundidad 2 (amigos de amigos)
+            all_connections = dfs(graph, name, 2)
+            
+            # Filtrar sugerencias que no sean amigos directos
+            suggestions = all_connections - direct_friends - {name}
+            return list(suggestions)
 
 neo4j_crud = Neo4jCRUD("neo4j+s://1af53478.databases.neo4j.io", "neo4j", "qJwl-ycQN4aZZOCz6HKWDIkB0j6aHssZ9pSxTVJhz7o")
 
@@ -174,30 +175,6 @@ def get_friends():
     else:
         return jsonify({"error": "No friends found"}), 404
 
-@app.route('/backtracking', methods=['GET'])
-def backtracking():
-    name = request.args.get('name')
-    if not name:
-        return jsonify({"error": "Name is required"}), 400
-    friends = neo4j_crud.find_all_friends(name)
-    return jsonify(friends)
-
-@app.route('/bfs', methods=['GET'])
-def bfs():
-    name = request.args.get('name')
-    if not name:
-        return jsonify({"error": "Name is required"}), 400
-    result = neo4j_crud.bfs(name)
-    return jsonify(result)
-
-@app.route('/dfs', methods=['GET'])
-def dfs():
-    name = request.args.get('name')
-    if not name:
-        return jsonify({"error": "Name is required"}), 400
-    result = neo4j_crud.dfs(name)
-    return jsonify(result)
-
 @app.route('/shortest-path', methods=['GET'])
 def shortest_path():
     start_name = request.args.get('start')
@@ -209,6 +186,17 @@ def shortest_path():
         return jsonify(path)
     else:
         return jsonify({"error": "No path found"}), 404
+
+@app.route('/suggest-friends', methods=['GET'])
+def suggest_friends():
+    name = request.args.get('name')
+    if not name:
+        return jsonify({"error": "Name is required"}), 400
+    suggestions = neo4j_crud.suggest_friends(name)
+    if suggestions:
+        return jsonify(suggestions)
+    else:
+        return jsonify({"error": "No suggestions found"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

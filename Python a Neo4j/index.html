@@ -55,46 +55,9 @@
         <button onclick="getFriends()">Buscar Amigos</button>
       </div>
 
-      <!-- Formulario para Backtracking -->
-      <div class="card">
-        <h2>Backtracking (Amistades Indirectas)</h2>
-        <div class="form-group">
-          <label for="backtrackingName">Nombre:</label>
-          <input
-            type="text"
-            id="backtrackingName"
-            placeholder="Ingrese el nombre"
-          />
-        </div>
-        <button onclick="backtracking()">Buscar Amistades Indirectas</button>
-      </div>
-
-      <!-- Formulario para BFS
-      <div class="card">
-        <h2>BFS (Recorrido en Amplitud)</h2>
-        <div class="form-group">
-          <label for="bfsName">Nombre:</label>
-          <input type="text" id="bfsName" placeholder="Ingrese el nombre" />
-        </div>
-        <button onclick="bfs()">Ejecutar BFS</button>
-      </div> -->
-
-      <!-- Formulario para DFS -->
-      <div class="card">
-        <h2>
-          DFS (Recorrido en Profundidad) (Muestra todos los amigos, explora toda
-          la red)
-        </h2>
-        <div class="form-group">
-          <label for="dfsName">Nombre:</label>
-          <input type="text" id="dfsName" placeholder="Ingrese el nombre" />
-        </div>
-        <button onclick="dfs()">Ejecutar DFS</button>
-      </div>
-
       <!-- Formulario para Camino Más Corto -->
       <div class="card">
-        <h2>Camino Más Corto usa bfs</h2>
+        <h2>Camino Más Corto</h2>
         <div class="form-group">
           <label for="startName">Inicio:</label>
           <input type="text" id="startName" placeholder="Nombre de inicio" />
@@ -106,7 +69,15 @@
         <button onclick="shortestPath()">Buscar Camino Más Corto</button>
       </div>
 
-      <!-- Sección para mostrar resultados -->
+      <!-- Formulario para Sugerir Amigos -->
+      <div class="card">
+        <h2>Sugerir Amigos</h2>
+        <div class="form-group">
+          <label for="suggestName">Nombre:</label>
+          <input type="text" id="suggestName" placeholder="Ingrese el nombre" />
+        </div>
+        <button onclick="suggestFriends()">Sugerir Amigos</button>
+      </div>
     </div>
 
     <script>
@@ -186,57 +157,6 @@
         }
       }
 
-      // Backtracking: Encontrar todas las amistades indirectas
-      async function backtracking() {
-        const name = document.getElementById("backtrackingName").value;
-        if (!name) {
-          alert("El nombre es requerido");
-          return;
-        }
-
-        try {
-          const response = await fetch(`${apiUrl}/backtracking?name=${name}`);
-          const data = await response.json();
-          displayResult(data);
-        } catch (error) {
-          displayResult({ error: error.message });
-        }
-      }
-
-      // BFS: Recorrido en amplitud
-      async function bfs() {
-        const name = document.getElementById("bfsName").value;
-        if (!name) {
-          alert("El nombre es requerido");
-          return;
-        }
-
-        try {
-          const response = await fetch(`${apiUrl}/bfs?name=${name}`);
-          const data = await response.json();
-          displayResult(data);
-        } catch (error) {
-          displayResult({ error: error.message });
-        }
-      }
-
-      // DFS: Recorrido en profundidad
-      async function dfs() {
-        const name = document.getElementById("dfsName").value;
-        if (!name) {
-          alert("El nombre es requerido");
-          return;
-        }
-
-        try {
-          const response = await fetch(`${apiUrl}/dfs?name=${name}`);
-          const data = await response.json();
-          displayResult(data);
-        } catch (error) {
-          displayResult({ error: error.message });
-        }
-      }
-
       // Camino más corto entre dos personas
       async function shortestPath() {
         const start = document.getElementById("startName").value;
@@ -250,6 +170,23 @@
           const response = await fetch(
             `${apiUrl}/shortest-path?start=${start}&end=${end}`
           );
+          const data = await response.json();
+          displayResult(data);
+        } catch (error) {
+          displayResult({ error: error.message });
+        }
+      }
+
+      // Sugerir amigos
+      async function suggestFriends() {
+        const name = document.getElementById("suggestName").value;
+        if (!name) {
+          alert("El nombre es requerido");
+          return;
+        }
+
+        try {
+          const response = await fetch(`${apiUrl}/suggest-friends?name=${name}`);
           const data = await response.json();
           displayResult(data);
         } catch (error) {

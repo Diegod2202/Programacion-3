@@ -89,52 +89,7 @@ class Neo4jCRUD:
             # Ejecutar BFS
             return bfs(graph, start_name, end_name)
 
-    def suggest_friends(self, name):
-        with self.driver.session() as session:
-            # Obtener todos los datos de amistades
-            query = """
-            MATCH (p:Person)-[:FRIEND]->(friend:Person)
-            RETURN p.name AS person, friend.name AS friend
-            """
-            result = session.run(query)
-            
-            # Construir el grafo en Python
-            graph = {}
-            for record in result:
-                person = record["person"]
-                friend = record["friend"]
-                if person not in graph:
-                    graph[person] = []
-                if friend not in graph:
-                    graph[friend] = []
-                graph[person].append(friend)
-            
-            # Obtener amigos directos
-            direct_friends_query = """
-            MATCH (p:Person {name: $name})-[:FRIEND]->(friend:Person)
-            RETURN friend.name AS friend
-            """
-            direct_friends_result = session.run(direct_friends_query, name=name)
-            direct_friends = {record["friend"] for record in direct_friends_result}
-            
-            # Implementar DFS para encontrar amigos de amigos
-            def dfs(graph, node, depth, visited=None):
-                if visited is None:
-                    visited = set()
-                visited.add(node)
-                if depth == 0:
-                    return visited
-                for neighbor in graph.get(node, []):
-                    if neighbor not in visited:
-                        dfs(graph, neighbor, depth - 1, visited)
-                return visited
-            
-            # Ejecutar DFS con profundidad 2 (amigos de amigos)
-            all_connections = dfs(graph, name, 2)
-            
-            # Filtrar sugerencias que no sean amigos directos
-            suggestions = all_connections - direct_friends - {name}
-            return list(suggestions)
+    
 
 neo4j_crud = Neo4jCRUD("neo4j+s://1af53478.databases.neo4j.io", "neo4j", "qJwl-ycQN4aZZOCz6HKWDIkB0j6aHssZ9pSxTVJhz7o")
 

@@ -89,7 +89,7 @@ class Neo4jCRUD:
             # Ejecutar BFS
             return bfs(graph, start_name, end_name)
 
-     def suggest_friends(self, name):
+    def suggest_friends(self, name):
         with self.driver.session() as session:
             # Obtener todos los datos de amistades
             query = """
